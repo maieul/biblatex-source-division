@@ -1,4 +1,4 @@
-biblatex-source-division
+Source division with biblatex
 ========================
 
-Manage source-division with biblatex
+Manage source division with biblatex
