@@ -37,16 +37,16 @@
 \tableofcontents
 \section{Introduction}
 \subsection{Goals}
-The \biblatex package allows to refers to a precise page number when citing a references:
+The \biblatex package allows to refer to a precise page number when citing a reference:
 \begin{minted}{latex}
 \cite[23]{key}
 \end{minted}
 
 Means \enquote{cite the entry {\bibkey key}, and precise this we are referring to the p.~23 of this entry.}
 
-However, historian or philologist can want to precise an other information: the source division, which for an old text is independent of the edition. Mostly, this source division is something like: book, chapter, section, but it can have an other scheme. The source division is printed after the book name, but before the publication information (translator, address, publisher). The book division doesn't prevent to print the page number. 
+However, historian or philologist can want to precise an other information: the source division, which for an old text is independent of the edition. Mostly, this source division is something like: book, chapter, section, but it can have an other scheme. The source division is printed after the book name, but before the publication information (translator, address, publisher). The book division doesn't prevent printing the page number. 
 
-For example,  citing the work of Augustine \emph{De Doctrina Christiana} in the book~II, chapter~\textsc{viii} section~13 in French translation of the \emph{\selectlanguage{french}Bibliothèque Augustinienne}  will produce:
+For example,  citing the work of Augustine \emph{De Doctrina Christiana} in the book~II, chapter~\textsc{viii} section~13 in French translation of the \emph{\selectlanguage{french}Bibliothèque Augustinienne}:
 
 \begin{quotation}
 \cite[(II, \textsc{viii}, 13)152-154]{Augustin_DeDoctChr_BA}
@@ -75,7 +75,7 @@ It must be loaded after the \biblatex package.
 \usepackage{biblatex-source-division}
 \end{minted}
 
-When citing a reference (with \cmd{cite}, \cmd{footcite} or other citation command), you can add the division of source in parenthesis in the \opt{prenote} arg. The syntax of rest of the \opt{prenote} arg is the normal syntax of \biblatex.
+When citing a reference (with \cmd{cite}, \cmd{footcite} or other citation command),  the division of source is added in parenthesis in the \opt{prenote} arg. The syntax of the rest of the \opt{prenote} arg is the normal syntax of \biblatex.
 
 For example, our \file{.bib} for us texts in this documentation introduction is:
 
