@@ -5,4 +5,4 @@ dist: biblatex-source-division.pdf
 	zip ../biblatex-source-division.zip *sty *tex *pdf *md *.bib   makefile latexmkrc
   
 clean:
-	@$(RM) *.pdf *.toc *.aux *.out *.fdb_latexmk *.log *.bbl *.bcf *.blg
+	@$(RM) *.pdf *.toc *.aux *.out *.fdb_latexmk *.log *.bbl *.bcf *.blg *run.xml *.synctex.gz*
