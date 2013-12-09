@@ -1,8 +1,8 @@
-%.pdf: %.tex latexmkrc
+%.pdf: %.tex latexmkrc %.bib
 	latexmk -shell-escape *tex
 dist: biblatex-source-division.pdf
 	@$(RM) ../eledmac.zip
-	zip ../biblatex-source-division.zip *sty *tex *pdf *md   makefile latexmkrc
+	zip ../biblatex-source-division.zip *sty *tex *pdf *md *.bib   makefile latexmkrc
   
 clean:
-	@$(RM) *.pdf *.toc *.aux *.out *.fdb_latexmk *.log
+	@$(RM) *.pdf *.toc *.aux *.out *.fdb_latexmk *.log *.bbl *.bcf *.blg
