@@ -66,5 +66,40 @@ Its code is freely inspired of a contribution of Andrey Boruvka\footnote{\url{ht
 
 All issues can be submitted, in French or English, in the GitHub issues page\footnote{\url{https://github.com/maieul/biblatex-source-division/issues}.}.
 
+\section{Usage}
 
+The package is to be used in combination of \biblatex citestyle of the \emph{verbose} family.
+It must be loaded after the \biblatex package.
+\begin{minted}{tex}
+\usepackage[citestyle=verbose-***,...]{biblatex}
+\usepackage{biblatex-source-division}
+\end{minted}
+
+When citing a reference (with \cmd{cite}, \cmd{footcite} or other citation command), you can add the division of source in parenthesis in the \opt{prenote} arg. The syntax of rest of the \opt{prenote} arg is the normal syntax of \biblatex.
+
+For example, our \file{.bib} for us texts in this documentation introduction is:
+
+\inputminted{biblatex-source-division.bib}
+
+And we called them with :
+
+\begin{minted}{latex}
+\cite[(II, \textsc{viii}, 13)152-154]{Augustin_DeDoctChr_BA}
+
+\cite[(II, \textsc{viii}, 13)39-40]{Augustin_DeDoctChr_CCSL}
+\end{minted}
+
+\subsection{Styling}
+
+The division of source is put on the \bibfield{titleaddon} field. So you can stylize it with all the tools of biblatex.
+
+\subsection{Limitation}
+
+This package redefine the standard bibmacro \verb+precite+. If you want to redefine it, ensure to load the \verb+getsourcedivision+ bibmacro:
+
+\begin{minted}{latex}
+\renewbibmacro*{prenote}{%
+  \usebibmacro{getsourcedivision}%
+  ... your customisation}
+\end{minted}
 \end{document}
