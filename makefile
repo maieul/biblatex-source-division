@@ -1,4 +1,4 @@
-FILES = *sty *tex *pdf *md *.bib   makefile latexmkrc
+FILES = *sty *tex *pdf README *.bib   makefile latexmkrc
 %.pdf: %.tex latexmkrc %.bib
 	latexmk -shell-escape *tex
 dist: biblatex-source-division.pdf

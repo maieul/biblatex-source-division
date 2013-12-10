@@ -12,6 +12,6 @@ This work contains:
 - The packaging tool files:
   - makefile
   - latexmkrc
-- This README.md file
+- This README file
 
 All features can be requested in https://github.com/maieul/biblatex-source-division/issues
