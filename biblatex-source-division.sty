@@ -35,7 +35,7 @@
 % Analyse of the source division
 
 %% Main command
-\newrobustcmd*{\getsourcedivision@}[1]{\getsourcedivision@i#1&} 
+\newrobustcmd*{\getsourcedivision@}[1]{\getsourcedivision@i#1++} 
 
 % Are there parenthesis ?
 \def\getsourcedivision@i{%
@@ -44,7 +44,7 @@
     {\getsourcedivision@ii()}}
 
 % Put the source division and "true" postnote in macro
-\def\getsourcedivision@ii(#1)#2&{%
+\def\getsourcedivision@ii(#1)#2++{%
   \gdef\titleaddon{#1}%
   \gdef\postnote{#2}
  }
