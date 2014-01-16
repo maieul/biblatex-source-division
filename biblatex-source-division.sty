@@ -27,9 +27,11 @@
 
 % Get source division, put in in titladdon field, and delete source division from the postnote field
 \newbibmacro{getsourcedivision}{%
-  \usefield{\getsourcedivision@}{postnote}%
-   \restorefield{titleaddon}{\titleaddon}%
-   \restorefield{postnote}{\postnote}%
+  \iffieldundef{postnote}{}{%
+     \usefield{\getsourcedivision@}{postnote}%
+     \restorefield{titleaddon}{\titleaddon}%
+     \restorefield{postnote}{\postnote}%
+   }%
  }
  
 % Analyse of the source division
