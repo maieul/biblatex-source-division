@@ -28,6 +28,7 @@
 % Get source division, put in in titladdon field, and delete source division from the postnote field
 \newbibmacro{getsourcedivision}{%
   \iffieldundef{postnote}{}{%
+     \global\undef\volpostnote
      \usefield{\getsourcedivision@}{postnote}%
      \restorefield{titleaddon}{\titleaddon}%
      \restorefield{postnote}{\postnote}%
@@ -47,8 +48,17 @@
 
 % Put the source division and "true" postnote in macro
 \def\getsourcedivision@ii(#1)#2++{%
-  \gdef\titleaddon{#1}%
-  \gdef\postnote{#2}%
+  \ifdefmacro{\volpostnote}{%
+    \gdef\titleaddon{#1}%
+    \gdef\postnote{{\volvol}{#2}}%   
+   }{\volgetsourcedivision@#2}
  }
+\newrobustcmd*{\volgetsourcedivision@}[2]{
+  \gdef\volpostnote{#2}%
+  \gdef\volvol{#1}%
+  \restorefield{volpostnote}{\volpostnote}%
+  \usefield{\getsourcedivision@}{volpostnote}%
+}
+
  
 \endinput
