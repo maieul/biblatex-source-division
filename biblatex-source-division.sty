@@ -15,7 +15,12 @@
 % This work consists of the file biblatex-source-division.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-source-division}[2014/01/16 v1.0.3 source division for eledpar]
+\ProvidesPackage{biblatex-source-division}[2014/01/19 v1.1.0 source division for eledpar]
+
+% Prepare in the case of <x>volcite commands
+
+\newtoggle{volcite}{}
+\apptocmd{\volcitecmd}{\global\toggletrue{volcite}}{}{}
 
 % Call the source division getting
 \renewbibmacro*{prenote}{%
@@ -28,7 +33,7 @@
 % Get source division, put in in titladdon field, and delete source division from the postnote field
 \newbibmacro{getsourcedivision}{%
   \iffieldundef{postnote}{}{%
-     \global\undef\volpostnote
+     \global\undef\volpostnote%
      \usefield{\getsourcedivision@}{postnote}%
      \restorefield{titleaddon}{\titleaddon}%
      \restorefield{postnote}{\postnote}%
@@ -51,9 +56,18 @@
   \ifdefmacro{\volpostnote}{%
     \gdef\titleaddon{#1}%
     \gdef\postnote{{\volvol}{#2}}%   
-   }{\volgetsourcedivision@#2}
+   }{%
+     \iftoggle{volcite}{%
+		\volgetsourcedivision@#2%
+		\global\togglefalse{volcite}%
+		}%
+		{%
+		  \gdef\titleaddon{#1}%
+		  \gdef\postnote{#2}%
+		}%
+	}%
  }
-\newrobustcmd*{\volgetsourcedivision@}[2]{
+\newrobustcmd*{\volgetsourcedivision@}[2]{%
   \gdef\volpostnote{#2}%
   \gdef\volvol{#1}%
   \restorefield{volpostnote}{\volpostnote}%
