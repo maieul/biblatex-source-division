@@ -1,0 +1,13 @@
+\documentclass{article}
+\usepackage[citestyle=verbose]{biblatex}
+\usepackage{biblatex-source-division}
+\begin{filecontents}{fvolcite.bib}
+@mvbook{toto,
+	Title={toto},
+	Author={tata}
+}
+\end{filecontents}
+\bibliography{fvolcite}
+\begin{document}
+\volcite{3}[(xxx)33]{toto}
+\end{document}
