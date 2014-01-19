@@ -6,8 +6,14 @@
 	Title={toto},
 	Author={tata}
 }
+@book{tata,
+	Title={tata},
+	Author={tata}
+}
 \end{filecontents}
 \bibliography{fvolcite}
 \begin{document}
-\volcite{3}[(xxx)33]{toto}
+\volcite{3}[(xxx)45]{toto}
+
+\cite[(xxx)45]{tata}
 \end{document}
