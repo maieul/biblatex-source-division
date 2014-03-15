@@ -93,12 +93,15 @@ And we called them with :
 
 The division of source is put on the \bibfield{titleaddon} field. So you can stylize it with all the tools of biblatex.
 
+\subsection{Limitation}
 
+To prevent conflict, all your own definitions of bibmacro must be made before loading the package.
 \section{Revision History}
 \begin{changelog}
 
 \begin{release}{2.0.0}{2014-03-15}
 \item Use the \emph{xpatch} package to prevent overriding of the  \verb+prenote+ macro.
+\item Add the source division after \emph{op. cit.} and \emph{ibid.}.
 \end{release}
 
 

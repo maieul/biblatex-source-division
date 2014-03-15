@@ -69,5 +69,8 @@
   \usefield{\getsourcedivision@}{volpostnote}%
 }
 
- 
+% Insert source division in cite:title and cite:ibid (for op. cit. and ibid.)
+
+\xapptobibmacro{cite:title}{\newunit\printfield{titleaddon}}{}{}
+\xapptobibmacro{cite:ibid}{\newunit\printfield{titleaddon}}{}{}
 \endinput
