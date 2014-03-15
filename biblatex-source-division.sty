@@ -40,13 +40,13 @@
 %% Main command
 \newrobustcmd*{\getsourcedivision@}[1]{\getsourcedivision@i#1++} 
 
-% Are there parenthesis ?
+%% Are there parenthesis ?
 \def\getsourcedivision@i{%
   \@ifnextchar(%)
     {\getsourcedivision@ii}%
     {\getsourcedivision@ii()}}
 
-% Put the source division and "true" postnote in macro
+%% Put the source division and "true" postnote in macro
 \def\getsourcedivision@ii(#1)#2++{%
   \ifdefmacro{\volpostnote}{%
     \gdef\titleaddon{#1}%
