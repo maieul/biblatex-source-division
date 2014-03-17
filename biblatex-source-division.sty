@@ -20,10 +20,12 @@
 % Prepare in the case of <x>volcite commands
 
 \newtoggle{volcite}{}
-\apptocmd{\volcitecmd}{\global\toggletrue{volcite}}{}{}
-
+\apptocmd{\volcitecmd}{\AtNextCite{\toggletrue{volcite}}}{}{}
+\apptocmd{\multivolcitecmd}{\AtNextMultiCite{\toggletrue{volcite}}}{}{}
 % Call the source division getting
-\AtEveryCitekey{\usebibmacro{getsourcedivision}}{}{}
+\AtEveryCitekey{%
+	\usebibmacro{getsourcedivision}%
+}{}{}
 
 % Get source division, put in in titladdon field, and delete source division from the postnote field
 \newbibmacro{getsourcedivision}{%
@@ -54,7 +56,6 @@
    }{%
      \iftoggle{volcite}{%
 		\volgetsourcedivision@#2%
-		\global\togglefalse{volcite}%
 		}%
 		{%
 		  \gdef\titleaddon{#1}%
