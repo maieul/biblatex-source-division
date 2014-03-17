@@ -30,7 +30,7 @@
   \iffieldundef{postnote}{}{%
      \global\undef\volpostnote%
      \usefield{\getsourcedivision@}{postnote}%
-     \restorefield{titleaddon}{\titleaddon}%
+     \iffieldundef{maintitle}{\restorefield{titleaddon}{\titleaddon}}{\restorefield{maintitleaddon}{\titleaddon}}%
      \restorefield{postnote}{\postnote}%
    }%
  }
