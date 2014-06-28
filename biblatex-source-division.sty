@@ -15,7 +15,7 @@
 % This work consists of the file biblatex-source-division.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-source-division}[2014/06/17 v2.2.0 source division for biblatex]
+\ProvidesPackage{biblatex-source-division}[2014/06/28 v2.2.1 source division for biblatex]
 \RequirePackage{xpatch}
 
 % Test if the package biblatex-true-citepages-omit is loaded
@@ -75,7 +75,7 @@
 
 % Insert source division in cite:short, cite:title and cite:ibid (for abreviated forms)
 
-\xapptobibmacro{cite:short}{\newunit\printfield{titleaddon}}{}{}
-\xapptobibmacro{cite:title}{\newunit\printfield{titleaddon}}{}{}
-\xapptobibmacro{cite:ibid}{\newunit\printfield{titleaddon}}{}{}
+\xapptobibmacro{cite:short}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
+\xapptobibmacro{cite:title}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
+\xapptobibmacro{cite:ibid}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
 \endinput
