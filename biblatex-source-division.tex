@@ -24,8 +24,8 @@
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
 	subtitle={},
-	revision={2.2.2},
-	date={12/05/2015},
+	revision={2.3.0},
+	date={15/05/2015},
 	url={https://github.com/maieul/biblatex-source-division}}
 % Hyphen
 \hyphenation{Ma-de-lei-ne}
@@ -89,13 +89,25 @@ And we called them with :
 \cite[(II, \textsc{viii}, 13)39-40]{Augustin_DeDoctChr_CCSL}
 \end{minted}
 
+\subsection{Option}
+
+If a \bibfield{maintitle} field is defined for an entry, the source division will be print after it. However, you can load the package with \verb+after=title+ option to print the source division after the \bibfield{title} field.
+
 \subsection{Styling}
 
-The division of source is put on the \bibfield{titleaddon} field. So you can stylize it with all the tools of biblatex.
+The division of source is put on the \bibfield{titleaddon} field. 
+However, if a \bibfield{maintitle} field is used and if the \verb+after+ option is not set to \verb+title+, the division source is put on the \bibfield{maintitleaddon} field.
+
+So you can stylize it with all the tools of biblatex. 
+
+
 
 \section{Revision History}
 \begin{changelog}
 
+\begin{release}{2.3.0}{2015-05-15}
+\item Add \verb+after+ package option. \see{after}
+\end{release}
 
 \begin{release}{2.2.2}{2015-05-12}
 \item Fix spurious field separator when source division is used without page number.
@@ -114,7 +126,7 @@ The division of source is put on the \bibfield{titleaddon} field. So you can sty
 \end{release}
 
 \begin{release}{2.1.0}{2014-03-17}
-\item Compatibiliy with \cs{<x>volcites} commands.
+\item Compatibility with \cs{<x>volcites} commands.
 \item Add the source division after \emph{maintitle} when using a multi-volume book.
 \item Use \cmd{AtEveryCitekey} instead of patching \verb+prenote+ macro.
 \end{release}

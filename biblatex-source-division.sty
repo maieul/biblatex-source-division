@@ -15,8 +15,16 @@
 % This work consists of the file biblatex-source-division.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-source-division}[2015/05/12 v2.2.2 source division for biblatex]
+\ProvidesPackage{biblatex-source-division}[2015/05/15 v2.3.0 source division for biblatex]
 \RequirePackage{xpatch}
+
+% The options
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=@biblatexsourcedivision@,prefix=biblatexsourcedivision@}
+\DeclareStringOption[maintitle]{after}
+\ProcessKeyvalOptions*
+% 
+
 
 % Test if the package biblatex-true-citepages-omit is loaded
 \@ifpackageloaded{biblatex-true-citepages-omit}{\PackageError{biblatex-true-citepages-omit}{You must load biblatex-true-citepages-omit AFTER biblatex-source-division}{}}{}
@@ -35,7 +43,9 @@
   \iffieldundef{postnote}{}{%
      \global\undef\volpostnote%
      \usefield{\getsourcedivision@}{postnote}%
-     \iffieldundef{maintitle}{\restorefield{titleaddon}{\titleaddon}}{\restorefield{maintitleaddon}{\titleaddon}}%
+     \ifboolexpr{test {\iffieldundef{maintitle}} or test{\ifdefstring{\biblatexsourcedivision@after}{title}}}%
+       {\restorefield{titleaddon}{\titleaddon}}
+       {\restorefield{maintitleaddon}{\titleaddon}}%
      \ifdefempty{\postnote}%
        {\clearfield{postnote}}%
        {\restorefield{postnote}{\postnote}}%
