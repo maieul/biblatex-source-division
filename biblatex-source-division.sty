@@ -15,7 +15,7 @@
 % This work consists of the file biblatex-source-division.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-source-division}[2015/05/15 v2.3.0 source division for biblatex]
+\ProvidesPackage{biblatex-source-division}[2015/07/07 v2.3.1 source division for biblatex]
 \RequirePackage{xpatch}
 
 % The options
@@ -87,9 +87,11 @@
   \usefield{\getsourcedivision@}{volpostnote}%
 }
 
-% Insert source division in cite:short, cite:title and cite:ibid (for abreviated forms)
+% Insert source division in bibmacro for abreviated forms
 
+\xapptobibmacro{cite:ibid}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
+\xapptobibmacro{cite:opcit}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
 \xapptobibmacro{cite:short}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
 \xapptobibmacro{cite:title}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
-\xapptobibmacro{cite:ibid}{\newunit\printfield{titleaddon}\printfield{maintitleaddon}}{}{}
+
 \endinput
