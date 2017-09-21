@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\usepackage[style=verbose-trad1, backend=biber, ibidpage]{biblatex}
+\usepackage{biblatex-source-division}
+
+\renewcommand*\newunitpunct{\addcomma\space}
+\addbibresource{biblatex-examples.bib}
+
+\begin{document}
+\cite[3]{sigfridsson}
+
+\cite[3]{sigfridsson}
+\end{document}
