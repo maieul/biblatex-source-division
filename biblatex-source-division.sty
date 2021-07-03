@@ -15,7 +15,7 @@
 % This work consists of the file biblatex-source-division.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-source-division}[2017/09/21 v2.4.2 source division for biblatex]
+\ProvidesPackage{biblatex-source-division}[2021/01/06 v2.4.3 source division for biblatex]
 \RequirePackage{xpatch}
 
 % The options
@@ -30,31 +30,46 @@
 \@ifpackageloaded{biblatex-true-citepages-omit}{\PackageError{biblatex-true-citepages-omit}{You must load biblatex-true-citepages-omit AFTER biblatex-source-division}{}}{}
 % Prepare in the case of <x>volcite commands
 
-\newtoggle{volcite}{}
-\apptocmd{\volcitecmd}{\AtNextCite{\toggletrue{volcite}}}{}{}
-\apptocmd{\multivolcitecmd}{\AtNextMultiCite{\toggletrue{volcite}}}{}{}
 % Call the source division getting
 \AtEveryCitekey{%
 	\usebibmacro{getsourcedivision}%
 }{}{}
 
 % Get source division, put in in titladdon field, and delete source division from the postnote field
-\newbibmacro{getsourcedivision}{%
-  \iffieldundef{postnote}{}{%
-     \global\undef\blxsd@volpostnote%
-     \usefield{\getsourcedivision@}{postnote}%
-     \ifdefempty{\blxsd@titleaddon}%
-       {}%
-       {%
-       \ifboolexpr{test {\iffieldundef{maintitle}} or test{\ifdefstring{\biblatexsourcedivision@after}{title}}}%
-         {\restorefield{titleaddon}{\blxsd@titleaddon}}
-         {\restorefield{maintitleaddon}{\blxsd@titleaddon}}%
-       }%
-     \ifdefempty{\blxsd@postnote}%
-       {\clearfield{postnote}}%
-       {\restorefield{postnote}{\blxsd@postnote}}%
-   }%
- }
+\renewbibmacro{getsourcedivision}{%
+  \ifboolexpr{
+    test {\iffieldundef{postnote}}
+    or
+    (
+      not test {\iffieldundef{volcitevolume}}
+      and
+      test {\iffieldundef{volcitepages}}
+    )
+  }
+    {}
+    {\iffieldundef{volcitevolume}
+       {\usefield{\getsourcedivision@}{postnote}}
+       {\usefield{\getsourcedivision@}{volcitepages}}%
+     \ifdefempty{\blxsd@titleaddon}
+       {}
+       {\ifboolexpr{
+          test {\iffieldundef{maintitle}}
+          or
+          test {\ifdefstring{\biblatexsourcedivision@after}{title}}
+        }
+          {\restorefield{titleaddon}{\blxsd@titleaddon}}
+          {\restorefield{maintitleaddon}{\blxsd@titleaddon}}}%
+     \iffieldundef{volcitevolume}
+       {\ifdefempty{\blxsd@postnote}
+          {\clearfield{postnote}}
+          {\restorefield{postnote}{\blxsd@postnote}}}
+       {\ifdefempty{\blxsd@postnote}
+          {\clearfield{volcitepages}%
+           \edef\abx@field@postnote{{\abx@field@volcitevolume}{}}}
+          {\restorefield{volcitepages}{\blxsd@postnote}%
+           \edef\abx@field@postnote{%
+             {\unexpanded\expandafter{\abx@field@volcitevolume}}%
+             {\unexpanded\expandafter{\abx@field@volcitepages}}}}}}}
  
 % Analyse of the source division
 
@@ -69,27 +84,8 @@
 
 %% Put the source division and "true" postnote in macro
 \def\getsourcedivision@ii(#1)#2++{%
-  \ifdefmacro{\blxsd@volpostnote}{%
-    \gdef\blxsd@titleaddon{#1}%
-    \gdef\blxsd@postnote{{\volvol}{#2}}%
-   }{%
-     \iftoggle{volcite}{%
-		   \volgetsourcedivision@#2%
-		}%
-		{%
-		  \gdef\blxsd@titleaddon{#1}%
-		  \gdef\blxsd@postnote{#2}%
-		}%
-	}%
- }
-\newrobustcmd*{\volgetsourcedivision@}[2]{%
-  \gdef\blxsd@volpostnote{#2}%
-  \gdef\volvol{#1}%
-  \ifdefempty{\blxsd@volpostnote}%
-    {\clearfield{volpostnote}}%
-    {\restorefield{volpostnote}{\blxsd@volpostnote}}%
-  \usefield{\getsourcedivision@}{volpostnote}%
-}
+  \gdef\blxsd@titleaddon{#1}%
+  \gdef\blxsd@postnote{#2}}
 
 % Insert source division in bibmacro for abreviated forms
 \newcommand{\sourcedivision@failtopatch}[1]{\PackageError{biblatex-source-division}{Fail to patch `#1` bibmacro}{}}
